@@ -1,0 +1,21 @@
+{
+  "name": "Sparkle",
+  "description": "Share your sparkle",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Share",
+    "your",
+    "sparkle"
+  ],
+  "dependencies": {
+    "express": "^4.16.3",
+    "rethinkdb": "^2.3.3"
+  },
+  "author": "Richard Li",
+  "license": "MIT"
+}
