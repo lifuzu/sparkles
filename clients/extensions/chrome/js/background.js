@@ -7,9 +7,10 @@ function onClickHandler(info, tab) {
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "http://localhost/post");
+    // TODO: put the host and port to config
+    xhr.open("POST", "http://localhost:3000/sparkles");
     xhr.setRequestHeader("content-type","application/json");
-    xhr.send(JSON.stringify({"url": info.pageUrl, "sparkle": info.selectionText, "author": "Mark Toen"}));
+    xhr.send(JSON.stringify({"url": info.pageUrl, "sparkle": info.selectionText, "author": "Mark Twin"}));
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
