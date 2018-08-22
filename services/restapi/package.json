@@ -2,10 +2,9 @@
   "name": "Sparkle",
   "description": "Share your sparkle",
   "version": "1.0.0",
-  "main": "main.js",
-  "devDependencies": {},
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
   "keywords": [
     "Share",
@@ -13,8 +12,15 @@
     "sparkle"
   ],
   "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
     "express": "^4.16.3",
-    "rethinkdb": "^2.3.3"
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11",
+    "rethinkdb": "^2.3.3",
+    "socket.io": "^2.1.1"
   },
   "author": "Richard Li",
   "license": "MIT"

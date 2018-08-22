@@ -12,7 +12,11 @@
     ],
     "options_page": "options.html",
     "background": {
-        "scripts": ["js/background.js"],
+        "scripts": [
+            "libs/socket.io.js",
+            "js/socket.js",
+            "js/background.js"
+        ],
         "persistent": false
     },
     "page_action": {

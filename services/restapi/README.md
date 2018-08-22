@@ -1,6 +1,18 @@
 
 
+Run:
+```
+$ npm i
+$ DEBUG=restapi:* npm start
+```
 
+
+Tips:
+
+- Install with express-generator
+```
+$ express --view=pug .
+```
 
 
 Links:
