@@ -15,7 +15,8 @@ $ popd
 ```
 $ docker build -t sparkles .
 
-$ docker tag sparkles:latest weimed.com/sparkles:${VERSION}
+$ docker tag sparkles:latest weimed/sparkles:${VERSION}
+$ docker tag sparkles:latest weimed/sparkles:1.0
 ```
 
 #### 2. Run the docker container
@@ -25,6 +26,7 @@ $ docker run -itd -p 3000:3000 -e RDB_HOST=host.docker.internal --name sparkles 
 
 #### 3. Push the docker image to dockerhub
 ```
+docker push weimed/sparkles:1.0
 ```
 
 #### 4. Run tereform/docker-compose to deploy

@@ -1,23 +1,40 @@
 
 function onClickHandler(info, tab) {
-    // console.log("item " + info.menuItemId + " was clicked");
-    // console.log("info: " + JSON.stringify(info));
-    console.log("info.pageUrl: " + info.pageUrl);
-    console.log("info.selectionText: " + info.selectionText);
 
-    var xhr = new XMLHttpRequest();
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
-    // TODO: put the host and port to config
-    xhr.open("POST", "http://localhost:3000/sparkles");
-    xhr.setRequestHeader("content-type","application/json");
-    xhr.send(JSON.stringify({"url": info.pageUrl, "sparkle": info.selectionText, "author": "Mark Twin"}));
+        var payload = { "url": info.pageUrl, "sparkle": info.selectionText, "author": "Mark Twin"};
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            console.log(xhr.responseText);
+        // Send the payload to client_modal for display
+        chrome.tabs.executeScript(tabs[0].id, {
+            file: "js/client_modal.js"
+        }, function() {
+            chrome.tabs.sendMessage(tabs[0].id, { type: "FROM_SPARKLE_EXTENSION", status: "SELECTED_FROM_PAGE", payload: payload });
+        });
+    });
+}
+
+function onMessageHandler(request, sender, sendResponse) {
+    if (request.type == "FROM_SPARKLE_CLIENT" && request.status == "SAVE_CONTENT_READY" && request.payload) {
+        var xhr = new XMLHttpRequest();
+
+        var payload = request.payload
+        // TODO: put the host and port to config
+        xhr.open("POST", "http://localhost:3000/sparkles");
+        xhr.setRequestHeader("content-type","application/json");
+        xhr.send(JSON.stringify({"url": payload.url, "sparkle": payload.sparkle, "author": payload.author}));
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                console.log(xhr.responseText);
+                sendResponse({status: "DONE"});
+            }
         }
+        return true;
     }
 }
+
+chrome.runtime.onMessage.addListener(onMessageHandler);
 
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 

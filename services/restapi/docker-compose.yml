@@ -1,0 +1,21 @@
+version: '2'
+services:
+  rethinkdb:
+    image: rethinkdb
+    restart: always
+    ports:
+     - "28015"
+     - "8080"
+    volumes:
+     - /data/rethinkdb:/data
+    command: rethinkdb --bind all --data /data
+
+  app:
+    image: weimed/sparkles:1.0
+    command: npm start
+    restart: always
+    depends_on: rethinkdb
+    environment:
+      RDB_HOST: rethinkdb
+    ports:
+     - 3000:80
