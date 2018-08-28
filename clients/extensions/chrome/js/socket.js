@@ -1,6 +1,6 @@
 /* Connects to the socket server */
 // TODO: put the host and port to config
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect(restapi.proto + "://" + restapi.host + ":" + restapi.port);
 
 socket.on('connect', function() {
     console.log('client connected');

@@ -16,6 +16,7 @@
     },
     "background": {
         "scripts": [
+            "js/config.js",
             "libs/socket.io.js",
             "js/socket.js",
             "js/background.js"

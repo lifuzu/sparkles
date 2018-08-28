@@ -42,3 +42,11 @@ $ docker-compose stop
 ```
 $ docker-compose logs
 ```
+
+### Deployment steps:
+```
+$ ssh root@138.197.195.17
+$ mkdir -p /data/rethinkdb
+$ # create docker-compose.yml
+$ docker-compose up -d
+```

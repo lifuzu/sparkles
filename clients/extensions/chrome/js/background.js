@@ -20,7 +20,7 @@ function onMessageHandler(request, sender, sendResponse) {
 
         var payload = request.payload
         // TODO: put the host and port to config
-        xhr.open("POST", "http://localhost:3000/sparkles");
+        xhr.open("POST", restapi.proto + "://" + restapi.host + ":" + restapi.port + "/sparkles");
         xhr.setRequestHeader("content-type","application/json");
         xhr.send(JSON.stringify({"url": payload.url, "sparkle": payload.sparkle, "author": payload.author}));
 
