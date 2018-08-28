@@ -26,7 +26,7 @@
 // #END of HTML
 
 modalDiv = document.createElement("div");
-modalDiv.setAttribute("style", "display: block; /* Display by default */ position: fixed; /* Stay in place */ z-index: 1; /* Sit on top */ padding-top: 100px; /* Location of the box */ left: 0; top: 0; width: 100%; /* Full width */ height: 100%; /* Full height */ overflow: auto; /* Enable scroll if needed */ background-color: rgb(0,0,0); /* Fallback color */ background-color: rgba(0,0,0,0.4); /* Black w/ opacity */");
+modalDiv.setAttribute("style", "display: block; /* Display by default */ position: fixed; /* Stay in place */ z-index: 999999; /* Sit on top */ padding-top: 100px; /* Location of the box */ left: 0; top: 0; width: 100%; /* Full width */ height: 100%; /* Full height */ overflow: auto; /* Enable scroll if needed */ background-color: rgb(0,0,0); /* Fallback color */ background-color: rgba(0,0,0,0.4); /* Black w/ opacity */");
 
 modalContentDiv = document.createElement("div");
 
@@ -76,6 +76,11 @@ modalContentBodyItem_2 = document.createElement("div");
 modalContentBodyItem_2.innerHTML = "Some other text ...";
 
 modalContentBodyDiv.appendChild(modalContentBodyItem_2);
+
+modalContentBodyItem_3 = document.createElement("div");
+modalContentBodyItem_3.innerHTML = "";
+
+modalContentBodyDiv.appendChild(modalContentBodyItem_3);
 
 modalContentDiv.appendChild(modalContentBodyDiv);
 
@@ -128,12 +133,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message.type == "FROM_SPARKLE_EXTENSION" && message.status == "SELECTED_FROM_PAGE" && message.payload) {
         modalContentBodyItem_1.innerHTML = message.payload.url
         modalContentBodyItem_2.innerHTML = message.payload.sparkle
+        modalContentBodyItem_3.innerHTML = message.payload.author
     }
 });
 
 modalContentFooterButton.onclick = function(event) {
 
-    var payload = {"url": modalContentBodyItem_1.innerHTML, "sparkle": modalContentBodyItem_2.innerHTML, "author": "Mark Twin"}
+    var payload = {"url": modalContentBodyItem_1.innerHTML, "sparkle": modalContentBodyItem_2.innerHTML, "author": modalContentBodyItem_3.innerHTML}
     chrome.runtime.sendMessage({type: "FROM_SPARKLE_CLIENT", status: "SAVE_CONTENT_READY", payload: payload}, function(response) {
         console.log("Response: ", response);
         if (response.status == "DONE") {

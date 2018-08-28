@@ -1,0 +1,32 @@
+version: '3'
+services:
+  rethinkdb:
+    image: rethinkdb
+    restart: always
+    networks:
+      - service_network
+    ports:
+      - "28015:28015"
+      - "8080:8080"
+    volumes:
+      - /data/rethinkdb:/data
+    command: rethinkdb --bind all --directory /data
+
+  app:
+    image: weimed/sparkles:1.1
+    command: npm start
+    restart: always
+    links:
+      - rethinkdb
+    depends_on:
+      - rethinkdb
+    networks:
+      - service_network
+    environment:
+      RDB_HOST: rethinkdb
+    ports:
+     - "3000:3000"
+
+networks:
+  service_network:
+    driver: "bridge"
