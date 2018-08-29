@@ -1,2 +1,5 @@
 **/node_modules/
 clients/extensions/chrome.pem
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
