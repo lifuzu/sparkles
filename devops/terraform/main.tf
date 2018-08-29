@@ -36,7 +36,7 @@ resource "digitalocean_droplet" "web" {
 
       # launch restapi service
       "mkdir -p services/restapi",
-      "curl -L https://raw.githubusercontent.com/lifuzu/sparkles/master/services/docker-compose.yml -o services/restapi/docker-compose.yml",
+      "curl -L https://raw.githubusercontent.com/lifuzu/sparkles/master/devops/docker-compose/docker-compose.yml -o services/restapi/docker-compose.yml",
       "mkdir -p /data/restapi",
       "cd services/restapi",
       "docker-compose up -d"
